@@ -24,11 +24,13 @@ class Form extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const isSucceed = this.props.getValue({ ...this.state });
+    if (!isSucceed) return;
+
     this.setState({
       name: '',
       number: '',
     });
-    this.props.getValue({ ...this.state });
   };
 
   render() {

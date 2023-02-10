@@ -22,13 +22,14 @@ export class App extends Component {
     );
     if (isRepeated) {
       alert(`${isRepeated.name} is already in contacts`);
-      return;
-    } else {
-      const contact = { id: nanoid(), name, number };
-      this.setState(prevState => ({
-        contacts: [...prevState.contacts, contact],
-      }));
+      return false;
     }
+
+    const contact = { id: nanoid(), name, number };
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
+    return true;
   };
 
   deleteName = id => {
@@ -38,9 +39,9 @@ export class App extends Component {
     });
   };
 
-  handleFilter = ({ name }) => {
+  handleFilter = filter => {
     this.setState({
-      filter: name,
+      filter,
     });
   };
 
@@ -68,7 +69,7 @@ export class App extends Component {
               />
             </>
           ) : (
-            false
+            <p>Your phonebook is empty</p>
           )}
         </Section>
       </>
